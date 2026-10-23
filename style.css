@@ -1,0 +1,513 @@
+/* =========================================
+   IMPORT CUSTOM FONT (SF PRO DISPLAY)
+========================================= */
+
+/* 1. Ketebalan Normal (Regular - 400) */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SFPRODISPLAYREGULAR.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. Ketebalan Sedang (Medium - 500) */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SFPRODISPLAYMEDIUM.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3. Ketebalan Penuh (Bold - 700) */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SFPRODISPLAYBOLD.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================
+   RESET & VARIABEL GLOBAL
+========================================= */
+:root {
+  --bg-main: white;
+  --bg-dark: black;
+  --text-white: white;
+
+  /* Seluruh website sekarang dikunci ke SF Pro Display */
+  --font-main: "SF Pro Display", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-main);
+  font-family: var(--font-main);
+  min-height: 200vh;
+  position: relative;
+  -webkit-font-smoothing: antialiased; /* Trik agar SF Pro terlihat lebih tajam di layar */
+}
+
+/* --- TATA LETAK NAVBAR --- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 2rem 5% 4rem 5%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 50;
+  background: linear-gradient(
+    to bottom,
+    rgb(227, 225, 221) 0%,
+    rgba(255, 255, 255, 0.8) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.top-nav > * {
+  pointer-events: auto;
+}
+
+/* --- TOMBOL GET IN TOUCH (KIRI) --- */
+.btn-get-in-touch {
+  position: absolute;
+  left: 5%;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.top-nav:has(.is-expanded) .btn-get-in-touch {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* === WADAH UTAMA MORPH === */
+.morph-menu-wrapper {
+  background-color: var(--bg-dark);
+  border-radius: 30px;
+  width: 400px;
+  height: 44px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition:
+    width 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+    height 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+    border-radius 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.morph-menu-wrapper.is-expanded {
+  width: 400px;
+  height: 450px;
+  border-radius: 20px;
+  transform: translateY(10px);
+}
+
+/* === STATE 1: KAPSUL === */
+.menu-capsule-state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  cursor: default;
+  color: var(--text-white);
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.icon-bracket {
+  font-weight: bold;
+}
+
+.text-menu {
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.text-menu:hover {
+  opacity: 0.6;
+}
+
+.morph-menu-wrapper.is-expanded .menu-capsule-state {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* === STATE 2: ISI MENU LEBAR === */
+.menu-expanded-state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s ease 0.4s,
+    visibility 0.4s ease 0.4s;
+}
+
+.morph-menu-wrapper.is-expanded .menu-expanded-state {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-header-expanded {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-white);
+}
+
+.nav-links-expanded {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.nav-links-expanded a {
+  text-decoration: none;
+  color: var(--text-white);
+  font-size: 1.8rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links-expanded a:hover {
+  opacity: 0.5;
+}
+
+.menu-footer-expanded {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 0.9rem;
+  color: var(--text-white);
+}
+
+.brand-tag {
+  font-weight: bold;
+}
+
+.social-tags a {
+  text-decoration: none;
+  color: var(--text-white);
+  margin-left: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.social-tags a:hover {
+  opacity: 0.5;
+}
+
+/* =========================================
+   HOME SECTION & DUAL MARQUEE
+========================================= */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--bg-main);
+}
+
+.floating-text {
+  position: absolute;
+  color: var(--bg-dark);
+  /* font-family: monospace dihapus agar otomatis mengikuti SF Pro dari body */
+  letter-spacing: 1px;
+  z-index: 20;
+}
+
+.floating-text.top-left {
+  top: 30%;
+  left: 10%;
+  font-size: 1.1rem;
+}
+
+.floating-text.bottom-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(250px + 1.5rem));
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.hero-image-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+.marquee-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100vw;
+  display: flex;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.gold-marquee {
+  left: 0;
+  z-index: 5;
+  color: var(--bg-dark);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+}
+
+.black-marquee {
+  left: 50%;
+  transform: translate(-50vw, -50%);
+  z-index: 15;
+  color: #ffffff;
+}
+
+.marquee-track {
+  display: flex;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.marquee-track span {
+  font-size: 6rem;
+  font-weight: 700;
+  padding-right: 2rem;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================================
+   ABOUT SECTION & SCROLL ANIMATION
+========================================= */
+.about-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* Membuat gradien halus dari gelap ke agak keemasan di bagian bawah sesuai fotomu */
+  background: linear-gradient(
+    to bottom,
+    var(--bg-main) 60%,
+    rgba(180, 138, 87, 0.15) 100%
+  );
+  overflow: hidden; /* Wajib agar lingkaran yang keluar layar tidak membuat scroll horizontal */
+  display: flex;
+  align-items: center;
+}
+
+/* --- Teks Title --- */
+.about-title {
+  position: absolute;
+  bottom: 25%;
+  left: 15%;
+  color: var(--bg-dark);
+  font-size: 1.1rem;
+  z-index: 20;
+}
+
+/* --- Kumpulan Lingkaran --- */
+.circles-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.circles-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  /* Efek transisi halus saat scrolling berhenti */
+  transition: transform 0.1s ease-out;
+}
+
+.circle {
+  width: 600px;
+  height: 600px;
+  border: 1px solid rgba(2, 2, 2, 0.25); /* Garis warna gold tapi agak transparan */
+  border-radius: 50%;
+  flex-shrink: 0;
+  /* Trik agar lingkaran saling bertumpuk (beririsan) */
+  margin-left: -200px;
+}
+
+.circle:first-child {
+  margin-left: -100px; /* Lingkaran pertama sedikit menjorok ke kiri layar */
+}
+
+/* --- Dekorasi Geometris ala Tetris --- */
+.decor-shape {
+  position: absolute;
+  background-color: var(--bg-dark);
+  z-index: 10;
+}
+
+/* Bentuk Kiri Atas */
+.top-left-shape {
+  top: 25%;
+  left: 8%;
+  width: 45px;
+  height: 18px;
+}
+.top-left-shape::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  width: 15px;
+  height: 25px;
+  background-color: var(--bg-dark);
+}
+
+/* Bentuk Kanan Bawah */
+.bottom-right-shape {
+  bottom: 15%;
+  right: 8%;
+  width: 80px;
+  height: 30px;
+}
+.bottom-right-shape::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 25px;
+  height: 40px;
+  background-color: var(--bg-dark);
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+========================================================= */
+@media screen and (max-width: 768px) {
+  .btn-get-in-touch {
+    display: none;
+  }
+  .top-nav {
+    padding: 1.5rem 5% 3rem 5%;
+  }
+  .hero-image-container {
+    width: 300px;
+    height: 300px;
+  }
+  .marquee-track span {
+    font-size: 4rem;
+  }
+  .floating-text.top-left {
+    top: 25%;
+    left: 5%;
+  }
+  .floating-text.bottom-center {
+    transform: translate(-50%, calc(150px + 1.5rem));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .morph-menu-wrapper {
+    width: 320px;
+  }
+  .morph-menu-wrapper.is-expanded {
+    width: 320px;
+    height: 400px;
+  }
+  .menu-expanded-state {
+    padding: 1.5rem;
+  }
+  .nav-links-expanded a {
+    font-size: 1.4rem;
+  }
+  .menu-footer-expanded {
+    font-size: 0.8rem;
+  }
+  .hero-image-container {
+    width: 250px;
+    height: 250px;
+  }
+  .marquee-track span {
+    font-size: 3rem;
+  }
+  .floating-text.bottom-center {
+    transform: translate(-50%, calc(125px + 1.5rem));
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .morph-menu-wrapper,
+  .morph-menu-wrapper.is-expanded {
+    width: 280px;
+  }
+}

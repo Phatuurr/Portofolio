@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[qitsuu]</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR UTAMA -->
+    <nav class="top-nav">
+      <!-- Tombol Get In Touch (Kiri) -->
+      <a href="#contact" class="btn-get-in-touch">• get in touch</a>
+
+      <!-- Wadah Morphing Menu -->
+      <div class="morph-menu-wrapper" id="morphMenu">
+        <!-- State 1: Kapsul Menu (Default) -->
+        <div class="menu-capsule-state">
+          <span class="icon-bracket">[ ]</span>
+          <!-- Pindahkan ID openMenuBtn ke tag teks ini -->
+          <span class="text-menu" id="openMenuBtn">menu</span>
+        </div>
+
+        <!-- State 2: Kotak Menu Terbuka -->
+        <div class="menu-expanded-state">
+          <div class="menu-header-expanded">
+            <button class="close-btn" id="closeMenuBtn">close</button>
+          </div>
+
+          <ul class="nav-links-expanded">
+            <li><a href="#home">home</a></li>
+            <li><a href="#about">about me</a></li>
+            <li><a href="#mystuff">my stuff</a></li>
+            <li><a href="#contact">get in touch</a></li>
+          </ul>
+
+          <div class="menu-footer-expanded">
+            <span class="brand-tag">[qitsuu]</span>
+            <div class="social-tags">
+              <a href="#">instagram</a>
+              <a href="#">github</a>
+            </div>
+          </div>
+        </div>
+        <!-- Penutup menu-expanded-state -->
+      </div>
+      <!-- PENUTUP MORPH MENU WRAPPER -->
+    </nav>
+    <!-- Penutup Nav -->
+
+    <!-- =========================================
+     HOME / HERO SECTION
+    ========================================= -->
+    <section class="hero-section" id="home">
+      <!-- Teks Statis di Kiri Atas -->
+      <div class="floating-text top-left">[hi there i'm an]</div>
+
+      <!-- Teks Statis di Bawah Tengah -->
+      <div class="floating-text bottom-center">[qitsuu here]</div>
+
+      <!-- LAYER 1: Marquee Latar Belakang (Warna Gold) -->
+      <div class="marquee-wrapper gold-marquee">
+        <div class="marquee-track">
+          <!-- Teks diketik 2x agar looping-nya tidak patah (seamless) -->
+          <span
+            >graphic designer • artist • ui/ux • video editor • photographer
+            •</span
+          >
+          <span
+            >graphic designer • artist • ui/ux • video editor • photographer
+            •</span
+          >
+        </div>
+      </div>
+
+      <!-- LAYER 2: Kontainer Gambar & Marquee Hitam -->
+      <div class="hero-image-container">
+        <!-- Ganti src dengan path fotomu -->
+        <img src="foto/hero1.jpeg" alt="Patur Profile" class="hero-img" />
+
+        <!-- LAYER 3: Marquee Depan (Hitam). Akan terpotong oleh overflow container gambar -->
+        <div class="marquee-wrapper black-marquee">
+          <div class="marquee-track">
+            <span
+              >graphic designer • artist • ui/ux • video editor • photographer
+              •</span
+            >
+            <span
+              >graphic designer • artist • ui/ux • video editor • photographer
+              •</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         ABOUT SECTION
+    ========================================= -->
+    <section class="about-section" id="about">
+      <!-- Dekorasi Bentuk Geometris (Kiri Atas & Kanan Bawah) -->
+      <div class="decor-shape top-left-shape"></div>
+      <div class="decor-shape bottom-right-shape"></div>
+
+      <!-- Wadah Lingkaran yang akan bergerak -->
+      <div class="circles-wrapper">
+        <div class="circles-track" id="scrollCircles">
+          <!-- Kita buat banyak lingkaran agar panjangnya melebihi layar -->
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <!-- Teks Keterangan -->
+      <div class="about-title">[about me]</div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
